@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>圖書館書籍與討論室預約系統</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="首頁">
+      <span class="brand-icon">▤</span>
+      <span>知閱圖書館 <small>LIBRARY SERVICE</small></span>
+    </a>
+    <nav>
+      <button class="nav-btn active" data-view="home">首頁</button>
+      <button class="nav-btn" data-view="books">書籍查詢</button>
+      <button class="nav-btn" data-view="rooms">討論室預約</button>
+      <button class="nav-btn" data-view="records">我的紀錄</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">YOUR CAMPUS LIBRARY</span>
+          <h1>讓閱讀與討論，<br><em>更簡單一點。</em></h1>
+          <p>查詢館藏、管理借閱，或預約適合小組討論的空間。</p>
+          <div class="hero-actions">
+            <button class="btn primary" data-goto="books">查詢書籍　↗</button>
+            <button class="btn secondary" data-goto="rooms">預約討論室</button>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="sun"></div><div class="book book-one"></div><div class="book book-two"></div>
+          <div class="book book-three"></div><div class="plant">♧</div>
+          <div class="art-label">READ · LEARN · SHARE</div>
+        </div>
+      </div>
+      <div class="section-heading">
+        <div><span class="eyebrow">SERVICES</span><h2>圖書館服務</h2></div>
+        <p>常用功能，一站完成</p>
+      </div>
+      <div class="service-grid">
+        <button class="service-card" data-goto="books"><span class="service-icon blue">⌕</span><b>書籍查詢</b><span>依書名、作者或分類尋找館藏</span><strong>開始查詢　→</strong></button>
+        <button class="service-card" data-goto="books"><span class="service-icon green">↔</span><b>借閱與預約</b><span>查看館藏狀態並進行借閱或預約</span><strong>查看書籍　→</strong></button>
+        <button class="service-card" data-goto="rooms"><span class="service-icon peach">▦</span><b>討論室預約</b><span>選擇日期、時段與討論室</span><strong>選擇時段　→</strong></button>
+        <button class="service-card" data-goto="records"><span class="service-icon purple">☷</span><b>我的紀錄</b><span>查看借閱、書籍預約及空間預約</span><strong>查看紀錄　→</strong></button>
+      </div>
+      <div class="notice"><span>✦</span><div><b>專題展示版本</b><p>此網站為資料庫課程的前端示範，資料暫存在目前瀏覽器，尚未連接正式資料庫或會員登入服務。</p></div></div>
+    </section>
+
+    <section id="books" class="view">
+      <div class="page-intro"><span class="eyebrow">BOOK CATALOG</span><h1>書籍查詢</h1><p>搜尋館藏資訊，查看借閱狀態。</p></div>
+      <div class="search-panel">
+        <label for="bookSearch">搜尋書名、作者、ISBN 或分類</label>
+        <div class="search-row"><input id="bookSearch" type="search" placeholder="例如：資料庫、王小明、978..."><button class="btn primary" id="searchBtn">搜尋</button></div>
+        <div class="filter-row"><span>快速篩選</span><button class="chip selected" data-filter="全部">全部</button><button class="chip" data-filter="可借閱">可借閱</button><button class="chip" data-filter="可預約">可預約</button></div>
+      </div>
+      <div class="results-heading"><b>館藏清單</b><span id="resultCount"></span></div>
+      <div id="bookList" class="book-grid"></div>
+    </section>
+
+    <section id="rooms" class="view">
+      <div class="page-intro"><span class="eyebrow">STUDY TOGETHER</span><h1>討論室預約</h1><p>選擇日期、時段與討論室，送出預約。</p></div>
+      <div class="booking-layout">
+        <form id="roomForm" class="panel">
+          <h2>預約資訊</h2>
+          <label for="roomDate">預約日期</label><input id="roomDate" type="date" required>
+          <label for="roomSelect">選擇討論室</label>
+          <select id="roomSelect"><option value="A">討論室 A｜3 樓・4 人</option><option value="B">討論室 B｜3 樓・6 人</option><option value="C">討論室 C｜4 樓・8 人</option></select>
+          <label for="roomTime">開始時間</label>
+          <select id="roomTime"><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="13:00">13:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option></select>
+          <label for="duration">使用時間</label><select id="duration"><option value="1">1 小時</option><option value="2">2 小時</option></select>
+          <label for="roomPurpose">使用目的（選填）</label><input id="roomPurpose" maxlength="80" placeholder="例如：課堂報告討論">
+          <button class="btn primary full" type="submit">確認預約</button>
+          <p class="form-note">系統會檢查同一間討論室的預約時段是否重疊。</p>
+        </form>
+        <div class="panel room-info">
+          <h2>討論室資訊</h2>
+          <div class="room-item"><span class="room-symbol">A</span><div><b>討論室 A</b><p>圖書館 3 樓・最多 4 人</p><small>白板、插座</small></div></div>
+          <div class="room-item"><span class="room-symbol green-bg">B</span><div><b>討論室 B</b><p>圖書館 3 樓・最多 6 人</p><small>白板、螢幕</small></div></div>
+          <div class="room-item"><span class="room-symbol peach-bg">C</span><div><b>討論室 C</b><p>圖書館 4 樓・最多 8 人</p><small>投影設備、白板</small></div></div>
+          <div class="mini-note">※ 房間、設備及可預約時段為專題示範資料，可依實際需求修改。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="records" class="view">
+      <div class="page-intro"><span class="eyebrow">MY LIBRARY</span><h1>我的紀錄</h1><p>查看目前的借閱與預約狀態。</p></div>
+      <div class="record-tabs"><button class="chip selected" data-record="loans">借閱紀錄</button><button class="chip" data-record="bookReservations">書籍預約</button><button class="chip" data-record="roomReservations">討論室預約</button></div>
+      <div id="recordList" class="record-list"></div>
+    </section>
+  </main>
+  <footer><span>知閱圖書館・資料庫管理課程專題</span><span>前端展示版 · 2026</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
